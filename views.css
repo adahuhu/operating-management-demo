@@ -183,3 +183,4 @@
 .v5-revenue-map-caption{position:absolute;right:14px;bottom:12px;color:#a7bec9;font-size:10px;background:#14232dcc;padding:4px 7px}
 .v5-revenue-map-details{margin-top:14px}
 @media(max-width:800px){.v5-revenue-map{overflow:hidden}.v5-revenue-map svg{min-width:0}.v5-revenue-map-label,.v5-revenue-map-line{display:none}.v5-revenue-map-mobile{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;padding:0 9px 9px}.v5-revenue-map-mobile>div{display:grid;gap:4px;padding:9px;background:#1e3542;border:1px solid #7198a8;font-size:10px}.v5-revenue-map-mobile b{font-size:11px}.v5-revenue-map-mobile strong{font-size:13px;color:#a5dfeb}.v5-revenue-map-mobile span{color:#b8cbd3;line-height:1.4}.v5-revenue-map-caption{position:static;width:max-content;max-width:100%;margin:0 9px 8px auto;font-size:9px}}
+@media(max-width:800px){.v5-revenue-map-mobile>div:last-child:nth-child(odd){grid-column:1/-1}}

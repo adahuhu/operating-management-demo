@@ -112,10 +112,10 @@ if ('IntersectionObserver' in window) {
 // The four scope controls use the same store-level demonstration totals as the analysis views.
 const scopeStores = [
   {name:'店铺 A',line:'品线 A',platform:'Amazon',country:'美国',income:360,purchase:240,fee:80,profit:40,target:50,orders:4500,stock:150,old:16},
-  {name:'店铺 B',line:'品线 A',platform:'Amazon',country:'美国',income:210,purchase:142,fee:42,profit:26,target:20,orders:2600,stock:90,old:14},
-  {name:'店铺 C',line:'品线 A',platform:'Walmart',country:'美国',income:140,purchase:90,fee:36,profit:14,target:30,orders:2200,stock:60,old:10},
-  {name:'店铺 D',line:'品线 B',platform:'Amazon',country:'英国',income:280,purchase:180,fee:55,profit:45,target:45,orders:3500,stock:110,old:16},
-  {name:'店铺 E',line:'品线 C',platform:'TikTok Shop',country:'英国',income:230,purchase:148,fee:47,profit:35,target:35,orders:3200,stock:100,old:12}
+  {name:'店铺 B',line:'品线 A',platform:'Amazon',country:'英国',income:210,purchase:142,fee:42,profit:26,target:20,orders:2600,stock:90,old:14},
+  {name:'店铺 C',line:'品线 A',platform:'Walmart',country:'加拿大',income:140,purchase:90,fee:36,profit:14,target:30,orders:2200,stock:60,old:10},
+  {name:'店铺 D',line:'品线 B',platform:'Amazon',country:'德国',income:280,purchase:180,fee:55,profit:45,target:45,orders:3500,stock:110,old:16},
+  {name:'店铺 E',line:'品线 C',platform:'TikTok Shop',country:'马来西亚',income:230,purchase:148,fee:47,profit:35,target:35,orders:3200,stock:100,old:12}
 ];
 const scopeProducts = [
   {store:'店铺 A',name:'新品 A-006',state:'阶段验证中',detail:'销售 32 / 阶段目标 30 万；投入 6.5 / 上限 7 万'},

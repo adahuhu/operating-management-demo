@@ -8,10 +8,10 @@ const ROUTES = [
 const COLORS = ['#587EB8','#C79A58','#509D93','#B4757B','#8D7CB1'];
 const STORES = [
   {name:'店铺 A',line:'品线 A',platform:'Amazon',country:'美国',income:360,expense:320,profit:40,target:50,orders:4500},
-  {name:'店铺 B',line:'品线 A',platform:'Amazon',country:'美国',income:210,expense:184,profit:26,target:20,orders:2600},
-  {name:'店铺 C',line:'品线 A',platform:'Walmart',country:'美国',income:140,expense:126,profit:14,target:30,orders:2200},
-  {name:'店铺 D',line:'品线 B',platform:'Amazon',country:'英国',income:280,expense:235,profit:45,target:45,orders:3500},
-  {name:'店铺 E',line:'品线 C',platform:'TikTok Shop',country:'英国',income:230,expense:195,profit:35,target:35,orders:3200}
+  {name:'店铺 B',line:'品线 A',platform:'Amazon',country:'英国',income:210,expense:184,profit:26,target:20,orders:2600},
+  {name:'店铺 C',line:'品线 A',platform:'Walmart',country:'加拿大',income:140,expense:126,profit:14,target:30,orders:2200},
+  {name:'店铺 D',line:'品线 B',platform:'Amazon',country:'德国',income:280,expense:235,profit:45,target:45,orders:3500},
+  {name:'店铺 E',line:'品线 C',platform:'TikTok Shop',country:'马来西亚',income:230,expense:195,profit:35,target:35,orders:3200}
 ];
 const TEAMS = [
   {name:'品线 A 团队',income:710,expense:630,profit:80,target:100,stock:300,old:40,veryOld:12},
@@ -59,8 +59,8 @@ const link = (route,text) => `<a class="view-link" href="#${route}">${text} ↗<
 function nav() {
   const analysisRoutes = ROUTES.filter(([key]) => key !== 'goals' && key !== 'todos');
   const menuRoutes = [...analysisRoutes, ['goals','目标制定'], ['todos','经营待办']];
-  document.getElementById('viewNav').innerHTML = `<a href="./index.html?v=20261010c">经营总控</a><span class="nav-label">结果分析</span>${analysisRoutes.map(([key,name])=>`<a class="sub" href="#${key}" data-route="${key}">${name}</a>`).join('')}<a href="#goals" data-route="goals">目标制定</a><a href="#todos" data-route="todos">经营待办</a>`;
-  document.getElementById('viewMobileNav').innerHTML = `<a href="./index.html?v=20261010c">经营总控</a>${menuRoutes.map(([key,name])=>`<a href="#${key}" data-route="${key}">${name}</a>`).join('')}`;
+  document.getElementById('viewNav').innerHTML = `<a href="./index.html?v=20261010e">经营总控</a><span class="nav-label">结果分析</span>${analysisRoutes.map(([key,name])=>`<a class="sub" href="#${key}" data-route="${key}">${name}</a>`).join('')}<a href="#goals" data-route="goals">目标制定</a><a href="#todos" data-route="todos">经营待办</a>`;
+  document.getElementById('viewMobileNav').innerHTML = `<a href="./index.html?v=20261010e">经营总控</a>${menuRoutes.map(([key,name])=>`<a href="#${key}" data-route="${key}">${name}</a>`).join('')}`;
 }
 function head(title,description) {
   return `<header class="view-head view-head-compact"><h1 class="sr-only">${title}</h1><div class="view-context">2026 年 10 月 · 截至 10.18 · 演示数据 · 人民币 / 万元</div></header>`;
@@ -102,7 +102,7 @@ function lineChart(values,labels) {
   return `<svg class="view-line-chart" viewBox="0 0 840 210" role="img" aria-label="${labels[0]}至${labels[labels.length-1]}变化趋势"><path class="area" d="${area}"/>${ticks.map(v=>`<path class="grid" d="M46 ${y(v).toFixed(1)}H807"/><text x="5" y="${(y(v)+4).toFixed(1)}">${v.toFixed(0)}</text>`).join('')}<path class="series" d="${path}"/>${values.map((v,i)=>`<circle class="dot" cx="${x(i).toFixed(1)}" cy="${y(v).toFixed(1)}" r="${i===values.length-1?4.8:2.5}"><title>${labels[i]}：${v} 万</title></circle>`).join('')}</svg><div class="view-chart-foot"><span>${labels[0]}</span><span>${labels[Math.floor(labels.length/2)]}</span><span>${labels[labels.length-1]}</span></div>`;
 }
 function archiveNote() {
-  return `<div class="view-archive">${link('goals','目标制定')}　<a href="./index.html?v=20261010c">经营总控 ↗</a></div>`;
+  return `<div class="view-archive">${link('goals','目标制定')}　<a href="./index.html?v=20261010e">经营总控 ↗</a></div>`;
 }
 
 function goals() {
