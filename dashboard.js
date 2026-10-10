@@ -91,22 +91,7 @@ renderExpense('store');
 
 const reducedPieMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 function revealPie(pie) {
-  if (reducedPieMotion.matches) return;
-  pie.classList.remove('pie-revealing');
-  void pie.offsetWidth;
-  pie.classList.add('pie-revealing');
-}
-if ('IntersectionObserver' in window) {
-  const pieObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      revealPie(entry.target);
-      pieObserver.unobserve(entry.target);
-    });
-  }, {threshold:.35});
-  document.querySelectorAll('.pie').forEach(pie => pieObserver.observe(pie));
-} else {
-  document.querySelectorAll('.pie').forEach(revealPie);
+  if (!reducedPieMotion.matches) window.chartMotion?.replay(pie);
 }
 
 // The four scope controls use the same store-level demonstration totals as the analysis views.

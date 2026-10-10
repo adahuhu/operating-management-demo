@@ -59,8 +59,8 @@ const link = (route,text) => `<a class="view-link" href="#${route}">${text} ↗<
 function nav() {
   const analysisRoutes = ROUTES.filter(([key]) => key !== 'goals' && key !== 'todos');
   const menuRoutes = [...analysisRoutes, ['goals','目标制定'], ['todos','经营待办']];
-  document.getElementById('viewNav').innerHTML = `<a href="./index.html?v=20261010e">经营总控</a><span class="nav-label">结果分析</span>${analysisRoutes.map(([key,name])=>`<a class="sub" href="#${key}" data-route="${key}">${name}</a>`).join('')}<a href="#goals" data-route="goals">目标制定</a><a href="#todos" data-route="todos">经营待办</a>`;
-  document.getElementById('viewMobileNav').innerHTML = `<a href="./index.html?v=20261010e">经营总控</a>${menuRoutes.map(([key,name])=>`<a href="#${key}" data-route="${key}">${name}</a>`).join('')}`;
+  document.getElementById('viewNav').innerHTML = `<a href="./index.html?v=20261010f">经营总控</a><span class="nav-label">结果分析</span>${analysisRoutes.map(([key,name])=>`<a class="sub" href="#${key}" data-route="${key}">${name}</a>`).join('')}<a href="#goals" data-route="goals">目标制定</a><a href="#todos" data-route="todos">经营待办</a>`;
+  document.getElementById('viewMobileNav').innerHTML = `<a href="./index.html?v=20261010f">经营总控</a>${menuRoutes.map(([key,name])=>`<a href="#${key}" data-route="${key}">${name}</a>`).join('')}`;
 }
 function head(title,description) {
   return `<header class="view-head view-head-compact"><h1 class="sr-only">${title}</h1><div class="view-context">2026 年 10 月 · 截至 10.18 · 演示数据 · 人民币 / 万元</div></header>`;
@@ -102,7 +102,8 @@ function lineChart(values,labels) {
   return `<svg class="view-line-chart" viewBox="0 0 840 210" role="img" aria-label="${labels[0]}至${labels[labels.length-1]}变化趋势"><path class="area" d="${area}"/>${ticks.map(v=>`<path class="grid" d="M46 ${y(v).toFixed(1)}H807"/><text x="5" y="${(y(v)+4).toFixed(1)}">${v.toFixed(0)}</text>`).join('')}<path class="series" d="${path}"/>${values.map((v,i)=>`<circle class="dot" cx="${x(i).toFixed(1)}" cy="${y(v).toFixed(1)}" r="${i===values.length-1?4.8:2.5}"><title>${labels[i]}：${v} 万</title></circle>`).join('')}</svg><div class="view-chart-foot"><span>${labels[0]}</span><span>${labels[Math.floor(labels.length/2)]}</span><span>${labels[labels.length-1]}</span></div>`;
 }
 function archiveNote() {
-  return `<div class="view-archive">${link('goals','目标制定')}　<a href="./index.html?v=20261010e">经营总控 ↗</a></div>`;
+  const goalsLink=location.hash==='#goals'?'':`${link('goals','目标制定')}　`;
+  return `<div class="view-archive">${goalsLink}<a href="./index.html?v=20261010f">经营总控 ↗</a></div>`;
 }
 
 function goals() {
@@ -204,12 +205,7 @@ function todos() {
 
 const PAGES={goals,profit,revenue,goods,cost,channel,todos};
 function revealPies() {
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const play=pie=>{pie.classList.remove('revealing');void pie.offsetWidth;pie.classList.add('revealing');};
-  if ('IntersectionObserver' in window) {
-    const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){play(entry.target);observer.unobserve(entry.target);}}),{threshold:.35});
-    document.querySelectorAll('.view-pie').forEach(pie=>observer.observe(pie));
-  } else document.querySelectorAll('.view-pie').forEach(play);
+  window.chartMotion?.scan(document.getElementById('viewMain'));
 }
 function bindProfit() {
   if (!document.getElementById('viewProfitChart')) return;
@@ -228,7 +224,32 @@ function bindProfit() {
   document.querySelectorAll('[data-profit-period]').forEach(button=>button.addEventListener('click',()=>{
     document.querySelectorAll('[data-profit-period]').forEach(x=>{x.classList.toggle('active',x===button);x.setAttribute('aria-selected',String(x===button));});
     document.querySelectorAll('[data-profit-view]').forEach(x=>x.hidden=x.dataset.profitView!==button.dataset.profitPeriod);
+    window.chartMotion?.replayWithin(document.querySelector(`[data-profit-view="${button.dataset.profitPeriod}"]`));
   }));
+}
+function bindRevenueCountries() {
+  const section=[...document.querySelectorAll('.view-section')].find(node=>node.querySelector('h2')?.textContent==='店铺和国家');
+  if(!section)return;
+  const controls=[...section.querySelectorAll('[data-country-select]')];
+  const rows=[...section.querySelectorAll('.v5-revenue-map-details table tbody tr')];
+  const title=section.querySelector('.v5-revenue-map-details .view-panel h3');
+  const reset=section.querySelector('#countryReset');
+  let selected=null;
+  const select=country=>{
+    selected=selected===country?null:country;
+    section.classList.toggle('has-country-selection',Boolean(selected));
+    controls.forEach(control=>control.setAttribute('aria-pressed',String(control.dataset.countrySelect===selected)));
+    rows.forEach(row=>{row.hidden=Boolean(selected)&&row.cells[2].textContent.trim()!==selected;});
+    title.textContent=selected?`${selected}店铺收入与客单价`:'五店收入与客单价';
+    reset.hidden=!selected;
+  };
+  controls.forEach(control=>{
+    control.addEventListener('click',()=>select(control.dataset.countrySelect));
+    if(control.tagName.toLowerCase()==='g')control.addEventListener('keydown',event=>{
+      if(event.key==='Enter'||event.key===' '){event.preventDefault();select(control.dataset.countrySelect);}
+    });
+  });
+  reset.addEventListener('click',()=>{if(selected)select(selected);});
 }
 function bindSpend() {
   if(!document.getElementById('spendPie'))return;
@@ -305,7 +326,11 @@ function render() {
   document.title=ROUTES.find(x=>x[0]===route)[1]+'｜经营管理中台';
   document.getElementById('viewMain').innerHTML=PAGES[route]();
   document.querySelectorAll('[data-route]').forEach(a=>{a.classList.toggle('active',a.dataset.route===route);if(a.dataset.route===route)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
-  bindProfit();bindSpend();bindChannel();bindGoods();bindActions();revealPies();
+  bindProfit();bindRevenueCountries();bindSpend();bindChannel();bindGoods();bindActions();revealPies();
   window.scrollTo({top:0,behavior:'instant'});
 }
-nav();window.addEventListener('hashchange',render);
+nav();
+document.querySelectorAll('[data-route]').forEach(anchor=>anchor.addEventListener('click',event=>{
+  if(location.hash.slice(1)===anchor.dataset.route){event.preventDefault();window.scrollTo({top:0,behavior:'smooth'});document.getElementById('viewMain').focus({preventScroll:true});}
+}));
+window.addEventListener('hashchange',render);
