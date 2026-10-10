@@ -9,7 +9,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright
 
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(os.environ.get("DEMO_ROOT") or Path(__file__).resolve().parents[1]).resolve()
 
 
 class QuietHandler(SimpleHTTPRequestHandler):
@@ -65,8 +65,14 @@ def run(base):
         visit(page, base, "goals")
         assert page.locator("#viewMain .view-kpi").count() == 4
         assert page.locator('#viewMain .view-archive a[href="#goals"]').count() == 0
+        if page.locator('.v6-formula').count():
+            assert page.locator('.v6-formula-item').count() == 5
+            assert '770' in page.locator('.v6-formula').inner_text()
 
         visit(page, base, "profit")
+        if page.locator('.v6-formula').count():
+            assert '采购成本多' in page.locator('.v6-formula').inner_text()
+            assert '160' in page.locator('.v6-formula').inner_text()
         page.locator('[data-profit-period="month"]').click()
         assert page.locator('[data-profit-view="month"]').is_visible()
         page.locator('[data-profit-period="day"]').click()
@@ -79,6 +85,9 @@ def run(base):
         assert "最多 30 天" in page.locator("#viewProfitMessage").inner_text()
 
         visit(page, base, "revenue")
+        if page.locator('.v6-order-day').count():
+            assert page.locator('.v6-order-day').count() == 7
+            assert '525 单' in page.locator('.v6-order-day').last.inner_text()
         country = page.locator('.v5-country-row[data-country-select="德国"]')
         country.click()
         section = page.locator(".view-section").filter(has_text="店铺和国家").first
@@ -93,6 +102,9 @@ def run(base):
         assert '店铺 B' in section.locator('table tbody tr:visible').inner_text()
 
         visit(page, base, "goods")
+        if page.locator('.v6-compare-row').count():
+            assert page.locator('.v6-compare-row').count() == 3
+            assert '58.8%' in page.locator('.v6-compare-row').first.inner_text()
         page.locator('[data-goods-filter="aged"]').click()
         assert page.locator("[data-good-row]:visible").count() == 2
         for tag in ('loss', 'shortage', 'new', 'all'):
@@ -105,18 +117,26 @@ def run(base):
         assert "商品 D-021" in page.locator("#goodsDetail").inner_text()
 
         visit(page, base, "cost")
+        if page.locator('.v6-variance').count():
+            assert page.locator('.v6-variance > div').count() == 3
+            assert '多 30 万' in page.locator('.v6-variance').inner_text()
         for scope in ('line', 'platform'):
             page.locator(f'[data-spend-view="{scope}"]').click()
             assert page.locator(f'[data-spend-view="{scope}"]').get_attribute('aria-selected') == 'true'
         assert page.locator("#spendTable tbody tr").count() == 3
 
         visit(page, base, "channel")
+        if page.locator('.v6-compare-row').count():
+            assert page.locator('.v6-compare-row').count() == 3
+            assert '59.4%' in page.locator('.v6-compare-row').first.inner_text()
         for platform in ('Amazon', 'TikTok Shop', 'Walmart'):
             page.locator(f'[data-channel-platform="{platform}"]').click()
             assert page.locator(f'[data-channel-platform="{platform}"]').get_attribute('aria-selected') == 'true'
         assert page.locator("#channelRows tbody tr").count() == 1
 
         visit(page, base, "todos")
+        if page.locator('.v6-decision-gate').count():
+            assert page.locator('.v6-decision-gate').count() == 2
         page.locator('[data-action-filter="bad"]').click()
         assert page.locator("[data-action-kind]:visible").count() == 1
         for kind in ('open', 'check'):
@@ -136,9 +156,11 @@ def run(base):
             motion_page = browser.new_page(viewport={"width": 1440, "height": 900})
             motion_page.add_init_script("""
                 window.__chartAnimationCount = 0;
+                window.__animatedParents = [];
                 const animate = Element.prototype.animate;
                 Element.prototype.animate = function(...args) {
                   window.__chartAnimationCount++;
+                  window.__animatedParents.push(this.parentElement?.className || '');
                   return animate.apply(this, args);
                 };
             """)
@@ -147,6 +169,10 @@ def run(base):
             motion_page.wait_for_timeout(150)
             count = motion_page.evaluate("window.__chartAnimationCount")
             assert count > 0, f"{route}: no graphic animation"
+            if route == 'revenue' and motion_page.locator('.v6-order-rail').count():
+                assert 'v6-order-rail' in motion_page.evaluate("window.__animatedParents"), 'V6 order chart did not animate'
+            if route == 'goods' and motion_page.locator('.v6-compare-track').count():
+                assert 'v6-compare-track' in motion_page.evaluate("window.__animatedParents"), 'V6 comparison did not animate'
             motion_page.close()
 
         home_motion = browser.new_page(viewport={"width": 1440, "height": 900})
@@ -184,6 +210,9 @@ def run(base):
         mobile.locator('.v5-revenue-map-mobile [data-country-select="加拿大"]').click()
         assert mobile.locator(".v5-revenue-map-details table tbody tr:visible").count() == 1
         assert not mobile.evaluate("document.documentElement.scrollWidth > innerWidth")
+        for route in ('goals', 'profit', 'goods', 'cost', 'channel', 'todos'):
+            visit(mobile, base, route)
+            assert not mobile.evaluate("document.documentElement.scrollWidth > innerWidth"), route
         mobile.close()
         browser.close()
     print("Smoke passed: home, seven views, responsive controls, chart motion, reduced motion.")
