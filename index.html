@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>经营总控｜经营管理中台</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><div class="brandmark">经</div><div><strong>经营管理中台</strong><small>经营管理演示</small></div></div>
+    <nav class="nav" aria-label="产品导航">
+      <a href="./index.html" class="active" aria-current="page">经营总控</a>
+      <a href="./views.html#goals">目标制定</a>
+      <span class="nav-label">结果分析</span>
+      <a class="sub" href="./views.html#profit">利润分析</a>
+      <a class="sub" href="./views.html#revenue">销售与回款分析</a>
+      <a class="sub" href="./views.html#goods">商品与库存分析</a>
+      <a class="sub" href="./views.html#cost">成本与投入分析</a>
+      <a class="sub" href="./views.html#channel">店铺利润与投入产出</a>
+      <a href="./views.html#todos">经营待办</a>
+    </nav>
+    <div class="sidefoot">演示数据 · 2026 年 10 月<br>数据截至 10.18<br>金额单位：万元</div>
+  </aside>
+  <div class="content" id="top">
+    <div class="topbar"><span>经营管理中台　/　<b>经营总控</b></span><a href="./views.html#goals">查看目标制定 ↗</a></div><nav class="mobile-product-nav" aria-label="移动端产品导航"><a class="active" href="./index.html">经营总控</a><a href="./views.html#goals">目标制定</a><a href="./views.html#profit">利润分析</a><a href="./views.html#revenue">销售与回款分析</a><a href="./views.html#goods">商品与库存分析</a><a href="./views.html#cost">成本与投入分析</a><a href="./views.html#channel">店铺利润与投入产出</a><a href="./views.html#todos">经营待办</a></nav>
+    <main>
+      <h1 class="sr-only">经营总控</h1>
+      <div class="filters" aria-label="筛选结构示意">
+        <span class="filter">店铺　全部 ▾</span><span class="filter">品线　全部 ▾</span><span class="filter">平台　全部 ▾</span><span class="filter">国家　全部 ▾</span>
+        <span class="filtermeta">演示账期 2026 年 10 月 · 数据截至 10.18 · 金额单位：万元</span>
+      </div>
+
+      <section class="section" aria-labelledby="result-title">
+        <div class="sectionhead"><h2 id="result-title">经营结果分析</h2><span>10.12—10.18 每日实际</span></div>
+        <div class="hero">
+          <article class="hero-card"><div class="tagline"><span>利润 · 本月预计</span><small>累计实际 85 万</small></div><div class="big">160 <small>万</small></div><div class="compare">目标 <b>180 万</b> · <b class="bad">预计少 20 万</b></div><div class="day"><span>10.18 单日 <b>5.2 万</b></span><span class="bad">比前日少 0.3 万</span></div><svg class="spark" viewBox="0 0 272 80" role="img" aria-label="10.12至10.18每日利润为5、4.6、4.8、5.2、4.1、5.5、5.2万元"><path class="base" d="M5 74H268"/><polyline points="10,37 52,50 94,43 136,30 178,67 220,20 262,30"/><circle cx="262" cy="30" r="3"/></svg><div class="sparklabel"><span>10.12</span><span>每日利润</span><span>10.18</span></div></article>
+          <article class="hero-card"><div class="tagline"><span>收入 · 本月预计</span><small>累计实际 650 万</small></div><div class="big">1,220 <small>万</small></div><div class="compare">目标 <b>1,200 万</b> · <b class="good">预计多 20 万</b></div><div class="day"><span>10.18 单日 <b>42 万</b></span><span class="good">比前日多 3 万</span></div><svg class="spark" viewBox="0 0 272 80" role="img" aria-label="10.12至10.18每日收入为31、34、35、37、36、39、42万元"><path class="base" d="M5 74H268"/><polyline points="10,70 52,57 94,52 136,43 178,48 220,34 262,20"/><circle cx="262" cy="20" r="3"/></svg><div class="sparklabel"><span>10.12</span><span>每日收入</span><span>10.18</span></div></article>
+          <article class="hero-card"><div class="tagline"><span>毛利率 · 本月预计</span><small>累计实际 33.8%</small></div><div class="big">34.4 <small>%</small></div><div class="compare">目标 <b>35.8%</b> · <b class="bad">预计少 1.4 个百分点</b></div><div class="day"><span>10.18 单日 <b>33.3%</b></span><span class="bad">比前日低 0.8 个百分点</span></div><svg class="spark" viewBox="0 0 272 80" role="img" aria-label="10.12至10.18每日毛利率为35.5、35.3、34.3、35.1、33.3、34.1、33.3百分比"><path class="base" d="M5 74H268"/><polyline points="10,40 52,42 94,52 136,44 178,62 220,54 262,62"/><circle cx="262" cy="62" r="3"/></svg><div class="sparklabel"><span>10.12</span><span>每日毛利率</span><span>10.18</span></div></article>
+          <article class="hero-card"><div class="tagline"><span>成本 · 本月预计采购成本</span><small>累计实际 430 万</small></div><div class="big">800 <small>万</small></div><div class="compare">收入 1,220 − 成本 800 ＝ <b>毛利 420</b></div><div class="day"><span>10.18 单日 <b>28 万</b></span><span class="warn">比前日多 2.3 万</span></div><svg class="spark" viewBox="0 0 272 80" role="img" aria-label="10.12至10.18每日采购成本为20、22、23、24、24、25.7、28万元"><path class="base" d="M5 74H268"/><polyline points="10,74 52,61 94,54 136,48 178,48 220,36 262,20"/><circle cx="262" cy="20" r="3"/></svg><div class="sparklabel"><span>10.12</span><span>每日采购成本</span><span>10.18</span></div></article>
+          <article class="hero-card"><div class="tagline"><span>费用 · 本月预计经营费用</span><small>累计已发生 135 万</small></div><div class="big">260 <small>万</small></div><div class="compare">按目标倒推可承受 <b>250 万</b> · <b class="bad">多 10 万</b></div><div class="day"><span>10.18 单日 <b>8.8 万</b></span><span class="warn">比前日多 1.0 万</span></div><svg class="spark" viewBox="0 0 272 80" role="img" aria-label="10.12至10.18每日经营费用为6、7.4、7.2、7.8、7.9、7.8、8.8万元"><path class="base" d="M5 74H268"/><polyline points="10,75 52,49 94,53 136,42 178,40 220,42 262,24"/><circle cx="262" cy="24" r="3"/></svg><div class="sparklabel"><span>10.12</span><span>每日经营费用</span><span>10.18</span></div></article>
+          <article class="hero-card"><div class="tagline"><span>货值 · 当前库存占资</span><small>90 天以上 68 万</small></div><div class="big">510 <small>万</small></div><div class="compare">阶段上限 <b>480 万</b> · <b class="bad">多 30 万</b></div><div class="day"><span>10.18 当前 <b>510 万</b></span><span class="good">比前日少 1 万</span></div><svg class="spark" viewBox="0 0 272 80" role="img" aria-label="10.12至10.18每日库存占资为518、516、515、514、512、511、510万元"><path class="base" d="M5 74H268"/><polyline points="10,20 52,34 94,41 136,48 178,61 220,68 262,74"/><circle cx="262" cy="74" r="3"/></svg><div class="sparklabel"><span>10.12</span><span>每日库存占资</span><span>10.18</span></div></article>
+        </div>
+      </section>
+
+      <section class="section" id="profit" aria-labelledby="profit-title">
+        <div class="sectionhead"><h2 id="profit-title">利润分析</h2><span><a class="section-jump" href="./views.html#profit">查看完整视图 ↗</a></span></div>
+        <article class="panel trend-panel">
+          <div class="panelhead"><h3>利润进度</h3><div class="period-switch" role="group" aria-label="利润图查看周期"><button type="button" data-period-toggle="day" aria-pressed="true">按日</button><button type="button" data-period-toggle="month" aria-pressed="false">按月</button></div></div>
+          <div class="chart-view" data-period-panel="day">
+            <div class="chart-controls"><span>每日利润 · 最多查询 30 天</span><label>开始 <input id="profitStart" type="date" min="2026-09-01" max="2026-10-18" value="2026-09-19"></label><label>结束 <input id="profitEnd" type="date" min="2026-09-01" max="2026-10-18" value="2026-10-18"></label><button id="profitRangeApply" type="button">查询</button></div>
+            <p class="chart-message" id="profitRangeMessage" aria-live="polite">显示 09.19—10.18，共 30 天</p>
+            <svg class="profit-chart daily-chart" id="profitDailyChart" viewBox="0 0 850 230" role="img" aria-label="近 30 天每日利润变化"></svg>
+            <div class="chart-x" id="profitDailyAxis"></div>
+            <div class="chart-facts"><span id="profitRangeSummary">30 天利润合计：待计算</span><span>10 月截至 10.18：累计实际 <b>85 万</b>；月底预测 <b>160 万</b> / 目标 <b>180 万</b></span></div>
+          </div>
+          <div class="chart-view" data-period-panel="month" hidden>
+            <div class="chart-legend"><span><i class="legend-plan"></i>月目标</span><span><i class="legend-actual"></i>完整月实际</span><span><i class="legend-forecast"></i>10 月预测</span></div>
+            <svg class="profit-chart" viewBox="0 0 850 220" role="img" aria-label="按月查看利润：5至9月实际分别为135、143、149、146、152万元，10月预测160万元，目标180万元">
+              <path class="chart-grid" d="M35 50H815 M35 100H815 M35 150H815 M35 190H815"/>
+              <path class="chart-plan" d="M35 90 L190 85 L345 80 L500 75 L655 65 L815 50"/>
+              <path class="chart-actual" d="M35 95 L190 87 L345 81 L500 84 L655 78"/>
+              <path class="chart-forecast" d="M655 78 L815 70"/>
+              <circle class="actual-dot" cx="655" cy="78" r="4"/><circle class="forecast-dot" cx="815" cy="70" r="4"/>
+              <text x="682" y="91">9 月实际 152</text><text x="741" y="64">10 月预测 160</text><text x="748" y="43">目标 180</text>
+            </svg>
+            <div class="chart-x"><span>5 月</span><span>6 月</span><span>7 月</span><span>8 月</span><span>9 月</span><span>10 月</span></div>
+            <div class="chart-facts"><span>5—9 月为完整月实际；10 月截至 10.18 累计实际 <b>85 万</b></span><span>10 月预测 <b>160 万</b> / 目标 <b>180 万</b></span></div>
+          </div>
+        </article>
+        <div class="grid2 wide-left" style="margin-top:12px">
+          <article class="panel"><div class="panelhead"><h3>品线负责团队盈亏</h3><span>本月预计 · 万元</span></div>
+            <div class="summaryline"><span><b>3</b> 支团队盈利</span><span><b>0</b> 支团队亏损</span><span>品线 A 距目标还差 <b class="bad">20 万</b></span></div>
+            <div class="scroll"><table class="table"><thead><tr><th>负责团队</th><th>收入</th><th>预计利润 / 目标</th><th>利润率</th><th>判断</th></tr></thead><tbody>
+              <tr><td>品线 A 团队</td><td>710</td><td>80 / 100</td><td>11.3%</td><td class="bad">盈利，但少 20</td></tr>
+              <tr><td>品线 B 团队</td><td>280</td><td>45 / 45</td><td>16.1%</td><td class="good">达到目标</td></tr>
+              <tr><td>品线 C 团队</td><td>230</td><td>35 / 35</td><td>15.2%</td><td class="good">达到目标</td></tr>
+            </tbody></table></div>
+            <p class="panelnote">团队按品线负责范围汇总；三队收入 <strong>1,220 万</strong>、利润 <strong>160 万</strong>，与公司合计一致。</p>
+          </article>
+          <article class="panel"><div class="panelhead"><h3>商品盈亏</h3><span>近三日：10.16 → 10.18</span></div>
+            <div class="summaryline"><span>在营 <b>48</b> 款</span><span>盈利 <b>35</b> 款</span><span>亏损 <b class="bad">8</b> 款</span><span>持平 <b>5</b> 款</span></div>
+            <div class="split-profit">
+              <div class="product-list"><h4 class="good">盈利商品</h4>
+                <div class="product-row"><span>商品 B-102</span><b class="good">+14 万</b><small>0.7 → 0.8 → 0.9</small></div>
+                <div class="product-row"><span>新品 D-014</span><b class="good">+11 万</b><small>0.4 → 0.5 → 0.5</small></div>
+                <div class="product-row"><span>商品 E-011</span><b class="good">+9 万</b><small>0.3 → 0.4 → 0.4</small></div>
+              </div>
+              <div class="product-list"><h4 class="bad">亏损商品</h4>
+                <div class="product-row"><span>商品 C-008</span><b class="bad">−3 万</b><small>−0.2 → −0.4 → −0.6</small></div>
+                <div class="product-row"><span>商品 A-014</span><b class="bad">−2 万</b><small>−0.1 → −0.2 → −0.2</small></div>
+                <div class="product-row"><span>商品 B-019</span><b class="bad">−1 万</b><small>−0.1 → −0.1 → −0.2</small></div>
+              </div>
+            </div>
+            
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="income" aria-labelledby="income-title">
+        <div class="sectionhead"><h2 id="income-title">收入分析</h2><span><a class="section-jump" href="./views.html#revenue">查看完整视图 ↗</a></span></div>
+        <div class="grid2 wide-right">
+          <article class="panel"><div class="panelhead"><h3>订单分布</h3><span>本月预计 16,000 单 · 10.18 单日 610 单</span></div>
+            <div class="pie-block order-pie" role="img" aria-label="本月预计订单按平台分布：Amazon 10,600 单，占 66.25%；Walmart 2,200 单，占 13.75%；TikTok Shop 3,200 单，占 20%">
+              <div class="pie pie-order"></div>
+              <div class="pie-legend">
+                <div><i class="slice-a"></i><span>Amazon</span><b>66.25%</b></div>
+                <div><i class="slice-b"></i><span>Walmart</span><b>13.75%</b></div>
+                <div><i class="slice-c"></i><span>TikTok Shop</span><b>20%</b></div>
+              </div>
+            </div>
+            <div class="scroll"><table class="table order-table"><thead><tr><th>平台</th><th>预计订单</th><th>订单占比</th></tr></thead><tbody>
+              <tr><td>Amazon</td><td>10,600 单</td><td>66.25%</td></tr>
+              <tr><td>Walmart</td><td>2,200 单</td><td>13.75%</td></tr>
+              <tr><td>TikTok Shop</td><td>3,200 单</td><td>20%</td></tr>
+              <tr><td>合计</td><td>16,000 单</td><td>100%</td></tr>
+            </tbody></table></div>
+            <p class="panelnote">订单占比和收入占比是两种口径；订单多，不等于利润高。</p>
+          </article>
+          <article class="panel"><div class="panelhead"><h3>收入分布</h3><span>按平台 · 本月预计 1,220 万</span></div>
+            <div class="pie-block revenue-pie" role="img" aria-label="平台收入分布：Amazon 850 万、69.7%；Walmart 140 万、11.5%；TikTok Shop 230 万、18.9%">
+              <div class="pie pie-platform-income"></div>
+              <div class="pie-legend">
+                <div><i class="slice-a"></i><span>Amazon</span><b>69.7%</b></div>
+                <div><i class="slice-b"></i><span>Walmart</span><b>11.5%</b></div>
+                <div><i class="slice-c"></i><span>TikTok Shop</span><b>18.9%</b></div>
+              </div>
+            </div>
+            <div class="scroll"><table class="table revenue-table"><thead><tr><th>平台</th><th>预计收入</th><th>收入占比</th></tr></thead><tbody>
+              <tr><td>Amazon</td><td>850 万</td><td>69.7%</td></tr>
+              <tr><td>Walmart</td><td>140 万</td><td>11.5%</td></tr>
+              <tr><td>TikTok Shop</td><td>230 万</td><td>18.9%</td></tr>
+              <tr><td>合计</td><td>1,220 万</td><td>100%</td></tr>
+            </tbody></table></div>
+            <p class="panelnote">收入占比以公司预计收入为分母；支出分布见下方成本与投入分析。</p>
+          </article>
+        </div>
+        <article class="panel" style="margin-top:12px"><div class="panelhead"><h3>店铺收入分布</h3><span>五店明细</span></div>
+          <div class="pie-block store-revenue-pie" role="img" aria-label="店铺收入占比：A 29.5%，B 17.2%，C 11.5%，D 23.0%，E 18.9%">
+            <div class="pie pie-store-income"></div>
+            <div class="pie-legend">
+              <div><i class="slice-a"></i><span>店铺 A</span><b>29.5%</b></div>
+              <div><i class="slice-b"></i><span>店铺 B</span><b>17.2%</b></div>
+              <div><i class="slice-c"></i><span>店铺 C</span><b>11.5%</b></div>
+              <div><i class="slice-d"></i><span>店铺 D</span><b>23.0%</b></div>
+              <div><i class="slice-e"></i><span>店铺 E</span><b>18.9%</b></div>
+            </div>
+          </div>
+          <div class="scroll"><table class="table"><thead><tr><th>平台 / 店铺</th><th>预计订单 / 约占</th><th>预计收入 / 占公司收入</th></tr></thead><tbody>
+            <tr><td>Amazon · 店铺 A</td><td>4,500 / 28%</td><td>360 / 29.5%</td></tr>
+            <tr><td>Amazon · 店铺 B</td><td>2,600 / 16%</td><td>210 / 17.2%</td></tr>
+            <tr><td>Walmart · 店铺 C</td><td>2,200 / 14%</td><td>140 / 11.5%</td></tr>
+            <tr><td>Amazon · 店铺 D</td><td>3,500 / 22%</td><td>280 / 23.0%</td></tr>
+            <tr><td>TikTok Shop · 店铺 E</td><td>3,200 / 20%</td><td>230 / 18.9%</td></tr>
+          </tbody></table></div>
+        </article>
+      </section>
+
+      <section class="section" id="cost" aria-labelledby="cost-title">
+        <div class="sectionhead"><h2 id="cost-title">成本与投入分析</h2><span><a class="section-jump" href="./views.html#cost">查看完整视图 ↗</a></span></div>
+        <article class="panel"><div class="panelhead"><h3>本月预计利润构成</h3><span>万元 · 同一经营口径</span></div>
+          <div class="lineage"><div><span>收入</span><b>1,220</b><small>预计高于目标 20</small></div><div><span>减：采购成本</span><b>800</b><small>得到毛利 420</small></div><div><span>减：经营费用及汇率影响</span><b>260</b><small>广告、履约、平台等</small></div><div><span>利润</span><b>160</b><small>预计低于目标 20</small></div></div>
+          <div class="bridge-note"><b>为什么收入多 20 万，利润还少 20 万：</b>毛利比目标少 10 万；经营费用比按目标倒推的 250 万多 10 万。费用差额的具体来源仍需核对。</div>
+        </article>
+        <article class="panel expense-panel" style="margin-top:12px">
+          <div class="panelhead"><h3>支出分布</h3><span>本月预计总支出 1,060 万 · 采购成本 800 万＋经营费用 260 万</span></div>
+          <div class="expense-switch" role="tablist" aria-label="支出分布查看维度">
+            <button type="button" data-expense-scope="store" role="tab" aria-selected="true">按店铺</button>
+            <button type="button" data-expense-scope="line" role="tab" aria-selected="false">按品线</button>
+            <button type="button" data-expense-scope="platform" role="tab" aria-selected="false">按平台</button>
+          </div>
+          <div class="expense-layout">
+            <div class="expense-graphic"><div class="pie expense-pie" id="expensePie" role="img" aria-label="各店铺支出占比"></div><div class="pie-legend" id="expenseLegend"></div></div>
+            <div class="scroll"><table class="table expense-table"><thead><tr><th>经营对象</th><th>预计支出</th><th>支出占比</th><th>预计收入</th><th>预计利润</th></tr></thead><tbody id="expenseRows"></tbody></table></div>
+          </div>
+          <p class="panelnote">支出包含采购成本和经营费用。品线按负责团队归属汇总；同一笔支出在不同维度下只计一次。</p>
+        </article>
+        <div class="grid2" style="margin-top:12px">
+          <article class="panel"><div class="panelhead"><h3>费用分布</h3><span>合计 260 万</span></div>
+            <div class="costrow"><span>履约 / 物流</span><div class="rail"><i style="width:100%"></i></div><b>80</b></div>
+            <div class="costrow"><span>广告</span><div class="rail"><i style="width:80%"></i></div><b>64</b></div>
+            <div class="costrow"><span>平台</span><div class="rail"><i style="width:56%"></i></div><b>45</b></div>
+            <div class="costrow"><span>仓储</span><div class="rail"><i style="width:38%"></i></div><b>30</b></div>
+            <div class="costrow"><span>售后</span><div class="rail"><i style="width:28%"></i></div><b>22</b></div>
+            <div class="costrow"><span>汇率及其他</span><div class="rail"><i style="width:24%"></i></div><b>19</b></div>
+            <p class="panelnote">采购成本 800 万单独列示，避免把广告等经营费用当成全部支出。</p>
+          </article>
+          <article class="panel"><div class="panelhead"><h3>费用分析</h3><span>费用偏差</span></div>
+            <div class="signal"><strong>广告预计 64 万，预算 60 万</strong><p>预计超预算 4 万；品线 A 调整效果于 10.23 核验。</p></div>
+            <div class="signal"><strong>商品 C-008：累计投入 5.8 / 上限 6 万</strong><p>销售 17 / 阶段目标 25 万、退货率 4.1%；继续投入前先查退货与利润。</p></div>
+            <div class="signal"><strong>店铺 B：利润高于目标 6 万</strong><p>广告投产 4.0，但履约费 16 元/单仍高于 15 元目标；追加投入还需核对完整费用及库存。</p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="stock" aria-labelledby="stock-title">
+        <div class="sectionhead"><h2 id="stock-title">货值分析</h2><span><a class="section-jump" href="./views.html#goods">查看完整视图 ↗</a></span></div>
+        <article class="panel map-panel">
+          <div class="panelhead"><h3>货值分布</h3><span>当前货值 510 万 · 按存放环节</span></div>
+          <div class="map-frame">
+            <svg class="asset-map" viewBox="0 0 1200 470" role="img" aria-label="货值在国内仓、海外仓、平台仓和在途四个环节的分布示意，地点与线路不代表实际仓址">
+              <defs><linearGradient id="mapRoute" gradientUnits="userSpaceOnUse" x1="265" y1="145" x2="970" y2="166"><stop stop-color="#63d5fa"/><stop offset=".5" stop-color="#aa94ff"/><stop offset="1" stop-color="#65e2c4"/></linearGradient></defs>
+              <image href="./world-map.svg" x="0" y="0" width="1200" height="470"/>
+              <path class="map-route-base" d="M970 166 C900 80 755 65 635 110 C510 60 375 75 265 145"/>
+              <path class="map-route-motion" d="M970 166 C900 80 755 65 635 110 C510 60 375 75 265 145"/>
+              <g class="map-node node-platform" transform="translate(265 145)"><circle class="map-halo" r="21"/><circle class="map-ring" r="9"/><circle class="map-core" r="4"/></g>
+              <g class="map-node node-overseas" transform="translate(635 110)"><circle class="map-halo" r="17"/><circle class="map-ring" r="8"/><circle class="map-core" r="3.5"/></g>
+              <g class="map-node node-domestic" transform="translate(970 166)"><circle class="map-halo" r="15"/><circle class="map-ring" r="7"/><circle class="map-core" r="3"/></g>
+              <g class="map-node node-transit" transform="translate(795 100)"><circle class="map-halo" r="13"/><circle class="map-ring" r="6"/><circle class="map-core" r="2.8"/></g>
+              <g class="map-callout platform-callout" transform="translate(128 177)"><rect width="170" height="60" rx="5"/><text x="13" y="24">平台仓</text><text class="map-value" x="13" y="47">230 万 · 45.1%</text></g>
+              <g class="map-callout overseas-callout" transform="translate(540 150)"><rect width="170" height="60" rx="5"/><text x="13" y="24">海外仓</text><text class="map-value" x="13" y="47">150 万 · 29.4%</text></g>
+              <g class="map-callout domestic-callout" transform="translate(977 213)"><rect width="170" height="60" rx="5"/><text x="13" y="24">国内仓</text><text class="map-value" x="13" y="47">80 万 · 15.7%</text></g>
+              <g class="map-callout transit-callout" transform="translate(766 26)"><rect width="164" height="55" rx="5"/><text x="13" y="23">在途</text><text class="map-value" x="13" y="45">50 万 · 9.8%</text></g>
+            </svg>
+            <div class="map-watermark">GLOBAL INVENTORY / LOCATION VIEW</div>
+            <div class="map-scroll-hint">左右滑动查看地图 →</div>
+          </div>
+          <div class="map-summary">
+            <div><span>平台仓</span><b>230 万</b><small>45.1% · 90 天以上 20 万</small></div>
+            <div><span>海外仓</span><b>150 万</b><small>29.4% · 90 天以上 32 万</small></div>
+            <div><span>国内仓</span><b>80 万</b><small>15.7% · 90 天以上 16 万</small></div>
+            <div><span>在途</span><b>50 万</b><small>9.8% · 90 天以上 0 万</small></div>
+          </div>
+          <p class="panelnote">地图位置与连线仅作视觉示意，不代表实际仓址或运输路线；货值、占比和库龄按本页演示口径展示。</p>
+        </article>
+        <article class="panel" style="margin-top:12px"><div class="panelhead"><h3>库龄分布</h3><span>按库龄与品线看</span></div>
+          <div class="subhead">库龄 · 合计 510 万</div>
+          <div class="agebar" role="img" aria-label="0至30天250万，31至90天192万，91至179天48万，180天以上20万"><span style="width:49.0196%"></span><span style="width:37.6471%"></span><span style="width:9.4118%"></span><span style="width:3.9215%"></span></div>
+          <div class="age-legend">
+            <div><i></i><span>0—30 天</span><b>250 万</b><small>49.0%</small></div>
+            <div><i></i><span>31—90 天</span><b>192 万</b><small>37.6%</small></div>
+            <div><i></i><span>91—179 天</span><b>48 万</b><small>9.4%</small></div>
+            <div><i></i><span>180 天以上</span><b>20 万</b><small>3.9%</small></div>
+          </div>
+          <div class="scroll"><table class="table"><thead><tr><th>品线</th><th>当前货值</th><th>90 天以上</th><th>其中 180 天以上</th><th>当前风险</th></tr></thead><tbody>
+            <tr><td>品线 A</td><td>300</td><td>40</td><td>12</td><td>商品 B-102 可售天数不足</td></tr>
+            <tr><td>品线 B</td><td>110</td><td>16</td><td>6</td><td>其中 12 万拟处理</td></tr>
+            <tr><td>品线 C</td><td>100</td><td>12</td><td>2</td><td>继续看周转</td></tr>
+          </tbody></table></div>
+          <p class="panelnote">90 天以上合计 68 万，其中 180 天以上 20 万；“其中”是包含关系，不重复相加。</p>
+        </article>
+        <article class="panel" style="margin-top:12px"><div class="panelhead"><h3>重点货品状态</h3><span>重点商品样本</span></div>
+          <div class="scroll"><table class="table"><thead><tr><th>商品</th><th>所在位置</th><th>货值</th><th>当前情况</th><th>下一步</th></tr></thead><tbody>
+            <tr><td>新品 A-006</td><td>平台仓</td><td>26</td><td>0—30 天，正常销售</td><td>继续验证销量与投入</td></tr>
+            <tr><td>商品 B-102</td><td>平台仓</td><td>8</td><td class="bad">可售 9 天，在途预计 17 天后到</td><td>核到货与可调拨量</td></tr>
+            <tr><td>商品 C-008</td><td>海外仓</td><td>22</td><td class="bad">其中 10 万已超 90 天</td><td>核销售与退货情况</td></tr>
+            <tr><td>商品 D-021</td><td>国内仓</td><td>16</td><td class="bad">全部超过 90 天</td><td>拟处理其中 12 万</td></tr>
+            <tr><td>商品 E-011</td><td>海外仓</td><td>18</td><td>31—90 天</td><td>继续看周转</td></tr>
+          </tbody></table></div>
+        </article>
+      </section>
+
+      <section class="section" id="matters" aria-labelledby="matters-title">
+        <div class="sectionhead"><h2 id="matters-title">待决策事项</h2><span><a class="section-jump" href="./views.html#todos">查看完整视图 ↗</a></span></div>
+        <div class="mattergrid">
+          <article class="panel"><div class="panelhead"><h3>店铺 B 投入增配</h3><span class="status warn">待决策</span></div>
+            <div class="summaryline"><span>利润预计 <b>26 万</b></span><span>目标 <b>20 万</b></span><span>履约费 <b>16 元/单</b> ＞ 目标 15</span></div>
+            <p class="panelnote">待核：完整费用、库存及订单承接量。</p>
+          </article>
+          <article class="panel"><div class="panelhead"><h3>商品 B-102 缺货处理</h3><span class="status warn">待决策</span></div>
+            <div class="summaryline"><span>可售 <b>9 天</b></span><span>在途预计 <b>17 天后</b>到</span><span>可能断货 <b class="bad">8 天</b></span></div>
+            <p class="panelnote">先确认真实到货日和可调拨量，再决定补货、调拨或销售安排。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="actions" aria-labelledby="actions-title">
+        <div class="sectionhead"><h2 id="actions-title">最近动作监控</h2><span><a class="section-jump" href="./views.html#todos">查看完整视图 ↗</a></span></div>
+        <article class="panel actions-panel">
+          <div class="scroll"><table class="table actions-table"><thead><tr><th>动作 / 来源</th><th>执行状态</th><th>下一步</th><th>实际结果</th><th>负责人 / 截止时间</th></tr></thead><tbody>
+            <tr><td>确认商品 A 尾程费用适用范围<small>A-017 · 关联事项 M-017</small></td><td><span class="status">已核对</span></td><td>比较承运商费用和时效，确认处理方案。</td><td>费用适用范围已核对；利润影响尚未测算。</td><td>对接人 A<small>10.17 · 已完成</small></td></tr>
+            <tr><td>按计划完成新品 A-006 阶段验证<small>A-006 · 原定计划</small></td><td><span class="status">正常推进</span></td><td>10.25 汇总销量、投入和质量反馈。</td><td>销售 32 / 目标 30 万；投入 6.5 / 上限 7 万，验证尚未结束。</td><td>对接人 B<small>10.25 · 待验证</small></td></tr>
+            <tr><td>落实品线 A 广告投入再分配<small>A-021 · 关联事项 M-021</small></td><td><span class="status active">已执行待验证</span></td><td>10.23 核对广告效果及利润影响。</td><td>分配动作已执行；公司广告预计 64 / 预算 60 万，调整效果待核。</td><td>对接人 C<small>10.23 · 待验证</small></td></tr>
+            <tr><td>核验店铺 B 履约安排调整<small>A-026 · 关联事项 M-026</small></td><td><span class="status bad-status">效果未达标</span></td><td>比较承运商费用和订单结构。</td><td>单均费用 18 → 16 元，仍高于 15 元目标。</td><td>对接人 D<small>10.22 · 继续核验</small></td></tr>
+            <tr><td>核对店铺 D 高库龄库存处理方案<small>A-031 · 关联事项 M-031</small></td><td><span class="status warn">方案待确认</span></td><td>确认拟处理 12 万对应商品与出库方式。</td><td>90 天以上库存 16 万；尚未出库，未计占资释放。</td><td>对接人 E<small>10.22 · 待确认</small></td></tr>
+            <tr><td>调整店铺 C 低效投入并查退货<small>A-032 · 关联事项 M-032</small></td><td><span class="status">进行中</span></td><td>核对商品 C-008 的退货原因及费用。</td><td>利润预计 14 / 目标 30 万，商品退货率 4.1%；改善效果待核。</td><td>对接人 F<small>10.21 · 待复核</small></td></tr>
+          </tbody></table></div>
+        </article>
+      </section>
+
+      <footer class="footer"><a href="./views.html#goals">目标制定 ↗</a><a href="./views.html#profit">利润分析 ↗</a><a href="./views.html#todos">经营待办 ↗</a><span>本页的数字、对象、平台归属、仓位和每日变化均为虚构演示数据；首页筛选仍为结构示意。</span></footer>
+    </main>
+  </div>
+</div>
+<script>
+document.querySelectorAll('[data-period-toggle]').forEach(button => {
+  button.addEventListener('click', () => {
+    const period = button.getAttribute('data-period-toggle');
+    document.querySelectorAll('[data-period-toggle]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+    document.querySelectorAll('[data-period-panel]').forEach(panel => { panel.hidden = panel.getAttribute('data-period-panel') !== period; });
+  });
+});
+</script>
+<script src="./dashboard.js"></script>
+</body>
+</html>
