@@ -167,3 +167,19 @@
 @media(max-width:1100px){.v5-action-row{grid-template-columns:1fr 1.1fr 1.1fr auto;gap:10px}}
 @media(max-width:800px){.v5-action-row{grid-template-columns:1fr 1fr;gap:8px;padding:13px 0}.v5-action-row>div:last-child{text-align:left}}
 @media(max-width:520px){.v5-compare{gap:5px}.v5-compare>div{padding:9px}.v5-compare b{font-size:14px}.v5-action-row{grid-template-columns:1fr}.v5-action-row>div{padding:2px 0}.v5-target-top strong{font-size:11px}}
+
+.v5-revenue-map{position:relative;overflow:auto;background:radial-gradient(ellipse at 44% 38%,#244354 0,#192a35 51%,#14232d 100%);border:1px solid #36505d;scrollbar-color:#587486 transparent}
+.v5-revenue-map svg{display:block;width:100%;min-width:730px;height:auto}
+.v5-revenue-map-line{fill:none;stroke:#8db9c6;stroke-width:2;stroke-dasharray:5 6;opacity:.9}
+.v5-revenue-map-halo{fill:#76c2d0;fill-opacity:.14;stroke:#87c7d4;stroke-opacity:.5;stroke-width:2}
+.v5-revenue-map-dot{fill:#a5dfeb;stroke:#e4f6f7;stroke-width:3}
+.v5-revenue-map-label rect{fill:#1e3542;stroke:#7198a8;stroke-width:1.3}
+.v5-revenue-map-label text{font-family:inherit;fill:#dce9ed}
+.v5-revenue-map-label .country{font-size:21px;font-weight:700}
+.v5-revenue-map-label .amount{font-size:20px;font-weight:700;fill:#a5dfeb}
+.v5-revenue-map-label .stores{font-size:17px;fill:#b8cbd3}
+.v5-revenue-map-label .orders{font-size:16px;fill:#9eb4bf}
+.v5-revenue-map-mobile{display:none}
+.v5-revenue-map-caption{position:absolute;right:14px;bottom:12px;color:#a7bec9;font-size:10px;background:#14232dcc;padding:4px 7px}
+.v5-revenue-map-details{margin-top:14px}
+@media(max-width:800px){.v5-revenue-map{overflow:hidden}.v5-revenue-map svg{min-width:0}.v5-revenue-map-label,.v5-revenue-map-line{display:none}.v5-revenue-map-mobile{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;padding:0 9px 9px}.v5-revenue-map-mobile>div{display:grid;gap:4px;padding:9px;background:#1e3542;border:1px solid #7198a8;font-size:10px}.v5-revenue-map-mobile b{font-size:11px}.v5-revenue-map-mobile strong{font-size:13px;color:#a5dfeb}.v5-revenue-map-mobile span{color:#b8cbd3;line-height:1.4}.v5-revenue-map-caption{position:static;width:max-content;max-width:100%;margin:0 9px 8px auto;font-size:9px}}

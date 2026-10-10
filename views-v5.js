@@ -79,6 +79,26 @@ function v5Profit() {
     ])))+archiveNote();
 }
 
+function v5RevenueMap(countries) {
+  const us=countries.find(c=>c.name==='美国');
+  const uk=countries.find(c=>c.name==='英国');
+  const storeNames=country=>STORES.filter(s=>s.country===country).map(s=>s.name.replace('店铺 ','')).join(' / ');
+  return `<div class="v5-revenue-map" role="img" aria-label="销售国家分布：美国 ${number(us.income)} 万元、${number(us.orders)} 单，店铺 ${storeNames('美国')}；英国 ${number(uk.income)} 万元、${number(uk.orders)} 单，店铺 ${storeNames('英国')}">
+    <svg viewBox="0 20 1200 390" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <image href="./world-map.svg" width="1200" height="470" opacity=".76"/>
+      <path class="v5-revenue-map-line" d="M280 153 V214 M588 113 V163"/>
+      <circle class="v5-revenue-map-halo" cx="280" cy="153" r="31"/>
+      <circle class="v5-revenue-map-halo" cx="588" cy="113" r="26"/>
+      <circle class="v5-revenue-map-dot" cx="280" cy="153" r="11"/>
+      <circle class="v5-revenue-map-dot" cx="588" cy="113" r="9"/>
+      <g class="v5-revenue-map-label" transform="translate(155 214)"><rect width="250" height="105" rx="4"/><text x="18" y="29" class="country">美国</text><text x="232" y="29" text-anchor="end" class="amount">${number(us.income)} 万</text><text x="18" y="61" class="stores">店铺 ${storeNames('美国')}</text><text x="18" y="85" class="orders">${number(us.orders)} 单</text></g>
+      <g class="v5-revenue-map-label" transform="translate(505 163)"><rect width="250" height="105" rx="4"/><text x="18" y="29" class="country">英国</text><text x="232" y="29" text-anchor="end" class="amount">${number(uk.income)} 万</text><text x="18" y="61" class="stores">店铺 ${storeNames('英国')}</text><text x="18" y="85" class="orders">${number(uk.orders)} 单</text></g>
+    </svg>
+    <div class="v5-revenue-map-mobile">${countries.map(c=>`<div><b>${c.name}</b><strong>${number(c.income)} 万</strong><span>店铺 ${storeNames(c.name)} · ${number(c.orders)} 单</span></div>`).join('')}</div>
+    <div class="v5-revenue-map-caption">按订单销售国家归属 · 点位表示国家位置</div>
+  </div>`;
+}
+
 function v5Revenue() {
   const cash=[['Amazon',85,190],['Walmart',15,30],['TikTok Shop',20,45]];
   const countries=[{name:'美国',income:710,orders:9300},{name:'英国',income:510,orders:6700}];
@@ -86,7 +106,7 @@ function v5Revenue() {
     kpis([['月末收入预计','1,220','万','目标 1,200 · 多 20','good'],['截至 10.18 收入','650','万','阶段计划 630 · 多 20','good'],['订单预计','16,000','单','五店合计'],['月末回款预计','265','万','目标 260 · 多 5','good']])+
     section('收入目标与日变化','',`<div class="view-grid one-three">${panel('近七日收入','10.12—10.18 · 万元',lineChart(V5_INCOME,V5_DAYS)+`<div class="v5-inline-stats"><span>10.12 <b>31 万</b></span><span>10.18 <b>42 万</b></span><span>七日合计 <b>254 万</b></span></div>`)}${panel('收入与回款目标','',v5Target([{name:'销售收入',forecast:1220,target:1200},{name:'现金回款',forecast:265,target:260}])+`<div class="v5-inline-stats"><span>截至 10.18 已回款 <b>120 万</b></span></div>`)}</div>`)+
     section('订单与收入分布','',`<div class="view-grid">${panel('平台订单','16,000 单',pie(PLATFORMS,'orders')+v5Matrix(['平台','订单','客单价'],PLATFORMS.map(p=>[p.name,`${number(p.orders)} 单`,`${Math.round(p.income*10000/p.orders)} 元`])))}${panel('平台收入','1,220 万',pie(PLATFORMS,'income')+v5Matrix(['平台','收入','收入占比'],PLATFORMS.map(p=>[p.name,`${p.income} 万`,pct(p.income,1220)])))}</div>`)+
-    section('店铺和国家','',`<div class="view-grid one-three">${panel('五店收入与客单价','',v5Matrix(['店铺','平台','国家','订单','收入','客单价'],STORES.map(s=>[s.name,s.platform,s.country,number(s.orders),`${s.income} 万`,`${Math.round(s.income*10000/s.orders)} 元`])))}${panel('国家汇总','',countries.map(c=>`<div class="v5-team"><div><b>${c.name}</b><strong>${c.income} 万</strong></div><div class="v5-track"><i style="width:${c.income/710*100}%"></i></div><small>${number(c.orders)} 单 · 客单价 ${Math.round(c.income*10000/c.orders)} 元</small></div>`).join(''))}</div>`)+
+    section('店铺和国家','',`${panel('销售国家分布','',v5RevenueMap(countries))}<div class="view-grid one-three v5-revenue-map-details">${panel('五店收入与客单价','',v5Matrix(['店铺','平台','国家','订单','收入','客单价'],STORES.map(s=>[s.name,s.platform,s.country,number(s.orders),`${s.income} 万`,`${Math.round(s.income*10000/s.orders)} 元`])))}${panel('国家汇总','',countries.map(c=>`<div class="v5-team"><div><b>${c.name}</b><strong>${c.income} 万</strong></div><div class="v5-track"><i style="width:${c.income/710*100}%"></i></div><small>${number(c.orders)} 单 · 客单价 ${Math.round(c.income*10000/c.orders)} 元</small></div>`).join(''))}</div>`)+
     section('平台结算与现金回款','',panel('到账进度','截至 10.18 实际 / 月末预计',cash.map(([name,actual,forecast])=>`<div class="depth-receipt"><span>${name}</span><div class="depth-bar-rail"><i style="width:${(actual/forecast*100).toFixed(1)}%"></i></div><b>${actual} / ${forecast} 万</b></div>`).join('')+`<div class="v5-inline-stats"><span>累计已到账 <b>120 万</b></span><span>月末预计 <b>265 万</b></span><span>回款目标 <b>260 万</b></span></div>`))+
     section('待到账核对','',panel('平台结算明细','月末预计减去截至 10.18 已到账',v5Matrix(['平台','已到账','月末预计','预计剩余到账','待核'],cash.map(([name,actual,forecast])=>[name,`${actual} 万`,`${forecast} 万`,`${forecast-actual} 万`,'结算单、预计到账日']))))+archiveNote();
 }
