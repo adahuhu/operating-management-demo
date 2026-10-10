@@ -108,3 +108,101 @@ if ('IntersectionObserver' in window) {
 } else {
   document.querySelectorAll('.pie').forEach(revealPie);
 }
+
+// The four scope controls use the same store-level demonstration totals as the analysis views.
+const scopeStores = [
+  {name:'店铺 A',line:'品线 A',platform:'Amazon',country:'美国',income:360,purchase:240,fee:80,profit:40,target:50,orders:4500,stock:150,old:16},
+  {name:'店铺 B',line:'品线 A',platform:'Amazon',country:'美国',income:210,purchase:142,fee:42,profit:26,target:20,orders:2600,stock:90,old:14},
+  {name:'店铺 C',line:'品线 A',platform:'Walmart',country:'美国',income:140,purchase:90,fee:36,profit:14,target:30,orders:2200,stock:60,old:10},
+  {name:'店铺 D',line:'品线 B',platform:'Amazon',country:'英国',income:280,purchase:180,fee:55,profit:45,target:45,orders:3500,stock:110,old:16},
+  {name:'店铺 E',line:'品线 C',platform:'TikTok Shop',country:'英国',income:230,purchase:148,fee:47,profit:35,target:35,orders:3200,stock:100,old:12}
+];
+const scopeProducts = [
+  {store:'店铺 A',name:'新品 A-006',state:'阶段验证中',detail:'销售 32 / 阶段目标 30 万；投入 6.5 / 上限 7 万'},
+  {store:'店铺 B',name:'商品 B-102',state:'缺货风险',detail:'可售 9 天；在途预计 17 天后到'},
+  {store:'店铺 C',name:'商品 C-008',state:'亏损且有积压',detail:'利润 −3 万；海外仓货值 22 万，其中 10 万超过 90 天'},
+  {store:'店铺 D',name:'商品 D-021',state:'高库龄待处理',detail:'90 天以上货值 16 万；其中 12 万拟处理'},
+  {store:'店铺 E',name:'商品 E-011',state:'正常观察',detail:'利润 +9 万；海外仓货值 18 万'}
+];
+const scopeActions = [
+  {store:'店铺 A',name:'核对商品 A 尾程费用',state:'利润影响待测算',date:'10.17'},
+  {store:'店铺 A',name:'新品 A-006 阶段验证',state:'10.25 汇总销量、投入和质量',date:'10.25'},
+  {store:'店铺 A',name:'品线 A 广告投入再分配',state:'10.23 核效果与利润',date:'10.23'},
+  {store:'店铺 B',name:'店铺 B 履约安排调整',state:'16 元/单，仍高于 15 元目标',date:'10.22'},
+  {store:'店铺 C',name:'店铺 C 低效投入与退货',state:'核商品 C-008 退货原因',date:'10.21'},
+  {store:'店铺 D',name:'店铺 D 高库龄库存处理',state:'拟处理 12 万，方案待确认',date:'10.22'}
+];
+const scopeControls = {
+  store:document.getElementById('filterStore'),
+  line:document.getElementById('filterLine'),
+  platform:document.getElementById('filterPlatform'),
+  country:document.getElementById('filterCountry')
+};
+const fullCompanySections = [...document.querySelectorAll('main > .section, main > .footer')];
+const filteredOverview = document.getElementById('filteredOverview');
+const filterReset = document.getElementById('filterReset');
+const scopeSum = (rows,key) => rows.reduce((total,row) => total+row[key],0);
+const scopeNumber = value => value.toLocaleString('zh-CN');
+const scopeDiff = value => value<0 ? `<span class="bad">少 ${-value} 万</span>` : value>0 ? `<span class="good">多 ${value} 万</span>` : '<span class="good">达到目标</span>';
+
+function updateScope() {
+  const selected = Object.fromEntries(Object.entries(scopeControls).map(([key,control]) => [key,control.value]));
+  const active = Object.values(selected).some(value => value!=='all');
+  filterReset.hidden = !active;
+  fullCompanySections.forEach(section => { section.hidden=active; });
+  filteredOverview.hidden = !active;
+  if (!active) { filteredOverview.innerHTML=''; return; }
+
+  const rows = scopeStores.filter(row => Object.entries(selected).every(([key,value]) => value==='all'||row[key]===value));
+  const labels = [['store','店铺'],['line','品线'],['platform','平台'],['country','国家']]
+    .filter(([key]) => selected[key]!=='all').map(([key,label]) => `${label} ${selected[key]}`);
+  const heading = labels.join(' · ');
+  if (!rows.length) {
+    filteredOverview.innerHTML = `<section class="section"><div class="sectionhead"><h2>当前筛选 · ${heading}</h2></div><div class="panel scope-empty">这些条件下没有对应的演示店铺。请调整筛选项或点击“重置筛选”。</div></section>`;
+    return;
+  }
+
+  const total = Object.fromEntries(['income','purchase','fee','profit','target','orders','stock','old'].map(key => [key,scopeSum(rows,key)]));
+  const margin = ((total.income-total.purchase)/total.income*100).toFixed(1);
+  const names = new Set(rows.map(row=>row.name));
+  const products = scopeProducts.filter(item=>names.has(item.store));
+  const actions = scopeActions.filter(item=>names.has(item.store));
+  const maxIncome = Math.max(...rows.map(row=>row.income));
+  const cards = [
+    ['利润 · 本月预计',total.profit,'万',`目标 ${total.target} 万 · ${scopeDiff(total.profit-total.target)}`],
+    ['收入 · 本月预计',total.income,'万',`${scopeNumber(total.orders)} 单 · ${rows.length} 家店铺`],
+    ['毛利率 · 本月预计',margin,'%',`毛利 ${total.income-total.purchase} 万`],
+    ['采购成本 · 本月预计',total.purchase,'万',`收入减成本得毛利 ${total.income-total.purchase} 万`],
+    ['经营费用 · 本月预计',total.fee,'万',`收入 − 成本 − 费用 = 利润 ${total.profit} 万`],
+    ['货值 · 当前库存占资',total.stock,'万',`其中 90 天以上 ${total.old} 万`]
+  ];
+  filteredOverview.innerHTML = `
+    <section class="section"><div class="sectionhead"><h2>经营结果分析</h2><span>当前筛选：${heading} · ${rows.length} 家店铺</span></div>
+      <div class="hero">${cards.map(([title,value,unit,note])=>`<article class="hero-card scope-card"><div class="tagline"><span>${title}</span></div><div class="big">${scopeNumber(value)} <small>${unit}</small></div><div class="compare">${note}</div></article>`).join('')}</div>
+    </section>
+    <section class="section"><div class="sectionhead"><h2>利润与收入分析</h2><span>本月预计 · 万元</span></div>
+      <div class="grid2 wide-left"><article class="panel"><div class="panelhead"><h3>经营对象表现</h3><span>按筛选范围汇总</span></div>
+        <div class="scroll"><table class="table scope-table"><thead><tr><th>店铺 / 品线</th><th>平台 / 国家</th><th>收入</th><th>成本</th><th>费用</th><th>利润 / 目标</th><th>订单</th></tr></thead><tbody>
+        ${rows.map(row=>`<tr><td>${row.name}<small>${row.line}</small></td><td>${row.platform}<small>${row.country}</small></td><td>${row.income}</td><td>${row.purchase}</td><td>${row.fee}</td><td>${row.profit} / ${row.target}</td><td>${scopeNumber(row.orders)}</td></tr>`).join('')}
+        <tr><td>合计</td><td>${rows.length} 家店铺</td><td>${total.income}</td><td>${total.purchase}</td><td>${total.fee}</td><td>${total.profit} / ${total.target}</td><td>${scopeNumber(total.orders)}</td></tr>
+        </tbody></table></div></article>
+        <article class="panel"><div class="panelhead"><h3>收入贡献与利润目标</h3></div>
+        ${rows.map(row=>`<div class="scope-contribution"><div><strong>${row.name}</strong><span>收入 ${row.income} 万 · 利润 ${row.profit} 万</span></div><div class="rail"><i style="width:${(row.income/maxIncome*100).toFixed(1)}%"></i></div><small>利润目标 ${row.target} 万 · ${scopeDiff(row.profit-row.target)}</small></div>`).join('')}</article></div>
+    </section>
+    <section class="section"><div class="sectionhead"><h2>成本与货值分析</h2><span>同一筛选范围</span></div>
+      <div class="grid2"><article class="panel"><div class="panelhead"><h3>成本与费用</h3><span>预计合计 ${total.purchase+total.fee} 万</span></div>
+        <div class="lineage scope-lineage"><div><span>收入</span><b>${total.income}</b></div><div><span>减：采购成本</span><b>${total.purchase}</b></div><div><span>减：经营费用</span><b>${total.fee}</b></div><div><span>利润</span><b>${total.profit}</b></div></div></article>
+      <article class="panel"><div class="panelhead"><h3>货值与库龄</h3><span>当前合计 ${total.stock} 万</span></div>
+        ${rows.map(row=>`<div class="scope-stock-row"><span>${row.name}</span><span>货值 ${row.stock} 万</span><b>90 天以上 ${row.old} 万</b></div>`).join('')}</article></div>
+    </section>
+    <section class="section"><div class="sectionhead"><h2>重点商品与动作</h2><span>与当前筛选对象对应</span></div>
+      <div class="grid2"><article class="panel"><div class="panelhead"><h3>商品情况</h3></div>
+        ${products.map(item=>`<div class="scope-list-row"><b>${item.name}</b><span>${item.state}</span><small>${item.detail}</small></div>`).join('')}</article>
+      <article class="panel"><div class="panelhead"><h3>最近动作监控</h3></div>
+        ${actions.length?actions.map(item=>`<div class="scope-list-row"><b>${item.name}</b><span>${item.date}</span><small>${item.state}</small></div>`).join(''):'<p class="panelnote">当前筛选范围内没有待推进的演示动作。</p>'}</article></div>
+    </section>
+    <p class="scope-disclaimer">筛选结果按演示店铺归属汇总；以上数字、商品和动作均为虚构演示数据。</p>`;
+}
+Object.values(scopeControls).forEach(control=>control.addEventListener('change',updateScope));
+filterReset.addEventListener('click',()=>{Object.values(scopeControls).forEach(control=>{control.value='all';});updateScope();});
+updateScope();

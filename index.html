@@ -12,25 +12,30 @@
     <div class="brand"><div class="brandmark">经</div><div><strong>经营管理中台</strong><small>经营管理演示</small></div></div>
     <nav class="nav" aria-label="产品导航">
       <a href="./index.html" class="active" aria-current="page">经营总控</a>
-      <a href="./views.html#goals">目标制定</a>
       <span class="nav-label">结果分析</span>
       <a class="sub" href="./views.html#profit">利润分析</a>
       <a class="sub" href="./views.html#revenue">销售与回款分析</a>
       <a class="sub" href="./views.html#goods">商品与库存分析</a>
       <a class="sub" href="./views.html#cost">成本与投入分析</a>
       <a class="sub" href="./views.html#channel">店铺利润与投入产出</a>
+      <a href="./views.html#goals">目标制定</a>
       <a href="./views.html#todos">经营待办</a>
     </nav>
     <div class="sidefoot">演示数据 · 2026 年 10 月<br>数据截至 10.18<br>金额单位：万元</div>
   </aside>
   <div class="content" id="top">
-    <div class="topbar"><span>经营管理中台　/　<b>经营总控</b></span><a href="./views.html#goals">查看目标制定 ↗</a></div><nav class="mobile-product-nav" aria-label="移动端产品导航"><a class="active" href="./index.html">经营总控</a><a href="./views.html#goals">目标制定</a><a href="./views.html#profit">利润分析</a><a href="./views.html#revenue">销售与回款分析</a><a href="./views.html#goods">商品与库存分析</a><a href="./views.html#cost">成本与投入分析</a><a href="./views.html#channel">店铺利润与投入产出</a><a href="./views.html#todos">经营待办</a></nav>
+    <div class="topbar"><span>经营管理中台　/　<b>经营总控</b></span><a href="./views.html#goals">查看目标制定 ↗</a></div><nav class="mobile-product-nav" aria-label="移动端产品导航"><a class="active" href="./index.html">经营总控</a><a href="./views.html#profit">利润分析</a><a href="./views.html#revenue">销售与回款分析</a><a href="./views.html#goods">商品与库存分析</a><a href="./views.html#cost">成本与投入分析</a><a href="./views.html#channel">店铺利润与投入产出</a><a href="./views.html#goals">目标制定</a><a href="./views.html#todos">经营待办</a></nav>
     <main>
       <h1 class="sr-only">经营总控</h1>
-      <div class="filters" aria-label="筛选结构示意">
-        <span class="filter">店铺　全部 ▾</span><span class="filter">品线　全部 ▾</span><span class="filter">平台　全部 ▾</span><span class="filter">国家　全部 ▾</span>
+      <div class="filters" aria-label="经营范围筛选">
+        <label class="filter">店铺 <select id="filterStore" aria-label="按店铺筛选"><option value="all">全部</option><option value="店铺 A">店铺 A</option><option value="店铺 B">店铺 B</option><option value="店铺 C">店铺 C</option><option value="店铺 D">店铺 D</option><option value="店铺 E">店铺 E</option></select></label>
+        <label class="filter">品线 <select id="filterLine" aria-label="按品线筛选"><option value="all">全部</option><option value="品线 A">品线 A</option><option value="品线 B">品线 B</option><option value="品线 C">品线 C</option></select></label>
+        <label class="filter">平台 <select id="filterPlatform" aria-label="按平台筛选"><option value="all">全部</option><option value="Amazon">Amazon</option><option value="Walmart">Walmart</option><option value="TikTok Shop">TikTok Shop</option></select></label>
+        <label class="filter">国家 <select id="filterCountry" aria-label="按国家筛选"><option value="all">全部</option><option value="美国">美国</option><option value="英国">英国</option></select></label>
+        <button class="filter-reset" id="filterReset" type="button" hidden>重置筛选</button>
         <span class="filtermeta">演示账期 2026 年 10 月 · 数据截至 10.18 · 金额单位：万元</span>
       </div>
+      <div id="filteredOverview" hidden aria-live="polite"></div>
 
       <section class="section" aria-labelledby="result-title">
         <div class="sectionhead"><h2 id="result-title">经营结果分析</h2><span>10.12—10.18 每日实际</span></div>
@@ -279,7 +284,7 @@
         </article>
       </section>
 
-      <footer class="footer"><a href="./views.html#goals">目标制定 ↗</a><a href="./views.html#profit">利润分析 ↗</a><a href="./views.html#todos">经营待办 ↗</a><span>本页的数字、对象、平台归属、仓位和每日变化均为虚构演示数据；首页筛选仍为结构示意。</span></footer>
+      <footer class="footer"><a href="./views.html#goals">目标制定 ↗</a><a href="./views.html#profit">利润分析 ↗</a><a href="./views.html#todos">经营待办 ↗</a><span>本页数字、对象、平台归属、仓位和每日变化均为虚构演示数据；筛选结果按演示对象汇总。</span></footer>
     </main>
   </div>
 </div>

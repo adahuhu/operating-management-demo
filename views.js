@@ -57,8 +57,10 @@ const number = n => Number(n).toLocaleString('zh-CN');
 const pct = (part,total) => (part/total*100).toFixed(1) + '%';
 const link = (route,text) => `<a class="view-link" href="#${route}">${text} ↗</a>`;
 function nav() {
-  document.getElementById('viewNav').innerHTML = `<a href="./index.html">经营总控</a><a href="#goals" data-route="goals">目标制定</a><span class="nav-label">结果分析</span>${ROUTES.slice(1,-1).map(([key,name])=>`<a class="sub" href="#${key}" data-route="${key}">${name}</a>`).join('')}<a href="#todos" data-route="todos">经营待办</a>`;
-  document.getElementById('viewMobileNav').innerHTML = `<a href="./index.html">经营总控</a>${ROUTES.map(([key,name])=>`<a href="#${key}" data-route="${key}">${name}</a>`).join('')}`;
+  const analysisRoutes = ROUTES.filter(([key]) => key !== 'goals' && key !== 'todos');
+  const menuRoutes = [...analysisRoutes, ['goals','目标制定'], ['todos','经营待办']];
+  document.getElementById('viewNav').innerHTML = `<a href="./index.html">经营总控</a><span class="nav-label">结果分析</span>${analysisRoutes.map(([key,name])=>`<a class="sub" href="#${key}" data-route="${key}">${name}</a>`).join('')}<a href="#goals" data-route="goals">目标制定</a><a href="#todos" data-route="todos">经营待办</a>`;
+  document.getElementById('viewMobileNav').innerHTML = `<a href="./index.html">经营总控</a>${menuRoutes.map(([key,name])=>`<a href="#${key}" data-route="${key}">${name}</a>`).join('')}`;
 }
 function head(title,description) {
   return `<header class="view-head view-head-compact"><h1 class="sr-only">${title}</h1><div class="view-context">2026 年 10 月 · 截至 10.18 · 演示数据 · 人民币 / 万元</div></header>`;
