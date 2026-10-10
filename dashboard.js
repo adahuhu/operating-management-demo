@@ -153,9 +153,9 @@ function updateScope() {
   filteredOverview.hidden = !active;
   if (!active) { filteredOverview.innerHTML=''; return; }
 
-  const rows = scopeStores.filter(row => Object.entries(selected).every(([key,value]) => value==='all'||row[key]===value));
+  const rows = scopeStores.filter(row => Object.entries(selected).every(([key,value]) => value==='all'||row[key==='store'?'name':key]===value));
   const labels = [['store','店铺'],['line','品线'],['platform','平台'],['country','国家']]
-    .filter(([key]) => selected[key]!=='all').map(([key,label]) => `${label} ${selected[key]}`);
+    .filter(([key]) => selected[key]!=='all').map(([key,label]) => key==='store'||key==='line'?selected[key]:`${label} ${selected[key]}`);
   const heading = labels.join(' · ');
   if (!rows.length) {
     filteredOverview.innerHTML = `<section class="section"><div class="sectionhead"><h2>当前筛选 · ${heading}</h2></div><div class="panel scope-empty">这些条件下没有对应的演示店铺。请调整筛选项或点击“重置筛选”。</div></section>`;
