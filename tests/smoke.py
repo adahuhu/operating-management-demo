@@ -26,6 +26,7 @@ def visit(page, base, route):
 
 
 def run(base):
+    is_v7 = (ROOT / "goals-v7.js").exists()
     versions=set(re.findall(r"\?v=(\d{8}[a-z])", "\n".join((ROOT / name).read_text() for name in ("index.html", "views.html", "views.js"))))
     assert len(versions)==1, f"Mixed asset/cache versions: {sorted(versions)}"
     chrome = os.environ.get("CHROME_BIN")
@@ -63,11 +64,17 @@ def run(base):
         page.wait_for_function("document.querySelector('#routeCrumb').textContent === '目标制定'")
 
         visit(page, base, "goals")
-        assert page.locator("#viewMain .view-kpi").count() == 4
-        assert page.locator('#viewMain .view-archive a[href="#goals"]').count() == 0
-        if page.locator('.v6-formula').count():
-            assert page.locator('.v6-formula-item').count() == 5
-            assert '770' in page.locator('.v6-formula').inner_text()
+        if is_v7:
+            assert page.locator('.goal-compile-table tbody tr').count() == 5
+            page.locator('[data-goal-mode="report"]').click()
+            assert page.locator('[data-goal-metric]').count() == 8
+            assert '月底预计少 20 万' in page.locator('.goal-result-hero').inner_text()
+        else:
+            assert page.locator("#viewMain .view-kpi").count() == 4
+            assert page.locator('#viewMain .view-archive a[href="#goals"]').count() == 0
+            if page.locator('.v6-formula').count():
+                assert page.locator('.v6-formula-item').count() == 5
+                assert '770' in page.locator('.v6-formula').inner_text()
 
         visit(page, base, "profit")
         if page.locator('.v6-formula').count():
@@ -148,7 +155,7 @@ def run(base):
 
         # Count actual Web Animations API calls, including graphics below the fold.
         for route, selector in [
-            ("goals", ".v5-track > i"), ("profit", ".view-line-chart .series"),
+            ("goals", ".goal-break-track > i" if is_v7 else ".v5-track > i"), ("profit", ".view-line-chart .series"),
             ("revenue", ".view-pie"), ("goods", ".goods-profit-bar"),
             ("cost", ".view-pie"), ("channel", ".depth-scatter-dot"),
             ("todos", ".v5-track > i"),
@@ -165,6 +172,8 @@ def run(base):
                 };
             """)
             visit(motion_page, base, route)
+            if route == 'goals' and is_v7:
+                motion_page.locator('[data-goal-mode="report"]').click()
             motion_page.locator(selector).first.scroll_into_view_if_needed()
             motion_page.wait_for_timeout(150)
             count = motion_page.evaluate("window.__chartAnimationCount")
